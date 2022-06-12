@@ -3,7 +3,7 @@
 
 on: [push]
 
-name: AzureARMDeploy
+name: AzureDeploy
 
 jobs:
 
