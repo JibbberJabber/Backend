@@ -18,4 +18,4 @@ jobs:
           
       - name: look for ps1 file
         run: |
-            ls '${{ env.OUTPUT_PATH }}/IaC/AzCLI'
+            ls 'Backend/IaC/AzCLI'
