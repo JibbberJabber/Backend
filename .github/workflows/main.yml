@@ -20,6 +20,6 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v1
           
-      - name: look for ps1 file
+      - name: Execute restart command
         run: |
-            ls '${{ env.OUTPUT_PATH }}\IaC\AzCLI'
+            az vm restart --resource-group JibberJabbberVM_group --name JibberJabbberVM --subscription 357ad59b-30a6-4d12-b0ad-dcfe18f5c0a4
