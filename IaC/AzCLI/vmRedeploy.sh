@@ -1,4 +1,5 @@
 #!/bin/bash
+az vm restart --resource-group JibberJabbberVM_group --name JibberJabbberVM --subscription 357ad59b-30a6-4d12-b0ad-dcfe18f5c0a4
 
 # This logs into Azure with a Service Principal Account
 #
@@ -15,5 +16,4 @@
 
 
 #restarting a specific VM in your resource group.
-Write-Output "Restarting.."
-az vm restart --resource-group JibberJabbberVM_group --name JibberJabbberVM --subscription 357ad59b-30a6-4d12-b0ad-dcfe18f5c0a4
+#Write-Output "Restarting.."
