@@ -1,13 +1,13 @@
 # This logs into Azure with a Service Principal Account
 #
-Write-Output "Logging in to Azure with a service principal..."
-az login `
-    --service-principal `
-    --username $servicePrincipal `
-    --password $servicePrincipalSecret `
-    --tenant $servicePrincipalTenantId
-Write-Output "Done"
-Write-Output ""
+#Write-Output "Logging in to Azure with a service principal..."
+#az login `
+#    --service-principal `
+#    --username $servicePrincipal `
+#    --password $servicePrincipalSecret `
+#    --tenant $servicePrincipalTenantId
+#Write-Output "Done"
+#Write-Output ""
 #endregion
 
 
