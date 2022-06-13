@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This logs into Azure with a Service Principal Account
 #
 #Write-Output "Logging in to Azure with a service principal..."
