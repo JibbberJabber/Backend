@@ -18,4 +18,4 @@ jobs:
           
       - name: look for ps1 file
         run: |
-            ls 'Backend/vmScript.ps1'
+            ls '/vmScript.ps1'
