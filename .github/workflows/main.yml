@@ -21,4 +21,4 @@ jobs:
           
       - name: Execute restart command
         run: 
-            cd 'azureVm.sh'
+            ls 'azureVm.sh'
