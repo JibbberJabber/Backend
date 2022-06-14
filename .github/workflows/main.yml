@@ -4,7 +4,7 @@
 on:
   push:
     branches:
-      - develop
+      - main
 
 name: AzureDeploy
 
@@ -20,5 +20,5 @@ jobs:
         uses: actions/checkout@v1
           
       - name: Execute restart command
-        run:  
-           bash 'azureVm.sh'
+        run: 
+            bash 'azureVm.sh'
