@@ -82,6 +82,9 @@ services:
       - postgres
 
 
+
+
+
 volumes:
   postdata:
     external: false
@@ -89,5 +92,4 @@ volumes:
     external: false
   postgres_data:
     driver: local
-#  keycloakdata:
-#    external: true
+
