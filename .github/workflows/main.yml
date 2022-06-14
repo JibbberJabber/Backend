@@ -11,17 +11,10 @@ jobs:
       runs-on: ubuntu-latest
       steps:
 
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
-        with:
-            username: ${{ secrets.USERNAME }}
-            key: ${{ secrets.DEV_KEY }}
-            port: ${{ secrets.PORT }}
-            script: whoami
           
       # checkout code from repo
       - name: checkout repo
         uses: actions/checkout@v1
           
       - name: Execute restart command
-        run: |
+        run: azureVm.sh
