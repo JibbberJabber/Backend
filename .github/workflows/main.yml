@@ -5,6 +5,7 @@ on:
     branches:
       - production
 
+
 name: AzureDeploy
 
 jobs:
