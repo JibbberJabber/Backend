@@ -1,7 +1,10 @@
 
 
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
 
 name: AzureDeploy
 
