@@ -11,10 +11,14 @@ jobs:
       runs-on: ubuntu-latest
       steps:
 
-      - name: Login to Azure
-        uses: azure/login@v1
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.KEY }}
+            port: ${{ secrets.PORT }}
+            script: whoami
           
       # checkout code from repo
       - name: checkout repo
@@ -22,4 +26,3 @@ jobs:
           
       - name: Execute restart command
         run: |
-            az vm restart --resource-group JibberJabbberVM_group --name JibberJabbberVM --subscription 357ad59b-30a6-4d12-b0ad-dcfe18f5c0a4
