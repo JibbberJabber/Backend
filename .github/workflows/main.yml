@@ -18,4 +18,4 @@ jobs:
           
       - name: Execute restart command
         run: | 
-            azureVm.sh
+           ls 'azureVm.sh'
