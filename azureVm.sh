@@ -7,3 +7,4 @@ docker rm -f $(docker ps -qa)
 docker rmi -f $(docker images -aq)
 sudo docker-compose up --force-recreate -d
 
+ 
