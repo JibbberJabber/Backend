@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chmod 400 ${{ secrets.A }}
+${{ secrets.USERNAME }}
 
 # chmod 400 ${{ secrets.PROD_KEY }}
 # ssh -i ${{ secrets.PROD_KEY }}  ${{ secrets.USERNAME }}@${{ secrets.PROD_IP }} 
