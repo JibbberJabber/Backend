@@ -21,8 +21,8 @@ jobs:
           
       - name: Execute restart command
         env:
-          KEY: '${{ secrets.DEV_KEY }}'
-          USERNAME: '${{ secrets.USERNAME }}'
-          IP: '${{ secrets.DEV_IP }}'
+          KEY: ${{ secrets.DEV_KEY }}
+          USERNAME: ${{ secrets.USERNAME }}
+          IP: ${{ secrets.DEV_IP }}
         run: |
             bash 'azureVm.sh'
