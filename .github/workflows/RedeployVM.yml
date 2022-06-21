@@ -1,9 +1,10 @@
 
 
+
 on:
   push:
     branches:
-      - production
+      - develop
 
 name: AzureDeploy
 
@@ -24,3 +25,4 @@ jobs:
             sudo docker-compose stop
             sudo docker-compose pull
             sudo docker-compose up --detach
+
