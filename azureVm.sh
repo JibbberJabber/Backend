@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 chmod 400 $KEY
 ssh -i $KEY  $USERNAME@$IP "cd Backend && sudo docker-compose down &&
                                                             sudo docker pull ghcr.io/jibbberjabber/posts-api:master &&
