@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 chmod 400 $KEY
 ssh -i $KEY  $USERNAME@$IP "cd Backend && sudo docker-compose down &&

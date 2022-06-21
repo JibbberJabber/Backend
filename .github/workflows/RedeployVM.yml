@@ -12,6 +12,10 @@ jobs:
 
     deploy:
       runs-on: ubuntu-latest
+      env:
+        KEY: ${{ secrets.DEV_KEY }}
+        USERNAME: ${{ secrets.USERNAME }}
+        IP: ${{ secrets.DEV_IP }}
       steps:
 
           
@@ -20,9 +24,4 @@ jobs:
         uses: actions/checkout@v1
           
       - name: Execute restart command
-        env:
-          KEY: ${{ secrets.DEV_KEY }}
-          USERNAME: ${{ secrets.USERNAME }}
-          IP: ${{ secrets.DEV_IP }}
-        run: |
-            bash 'azureVm.sh'
+        run: ./azureVm.sh
