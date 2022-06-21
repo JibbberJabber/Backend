@@ -21,6 +21,6 @@ jobs:
           key: ${{ secrets.PROD_KEY }}
           script: |
             cd Backend
-            sudo docker compose stop
-            sudo docker compose pull
-            sudo docker compose up --detach
+            sudo-docker compose stop
+            sudo-docker compose pull
+            sudo-docker compose up --detach
