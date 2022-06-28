@@ -5,3 +5,4 @@ General Backend container for JibberJabber
 
 [//]: # (docker-compose -f docker-compose.yml down)
 docker rm -f $(docker ps -a -q)
+ 
