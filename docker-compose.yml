@@ -31,6 +31,13 @@ services:
       DB_NAME: followers-db
       DB_HOST: follow_db
       DB_PORT: 5432
+      DD_API_KEY: ${DD_API_KEY}
+      DD_SITE: datadoghq.com
+      DD_LOGS_ENABLED: true
+      DD_APM_ENABLED: true
+      DD_STEP: PT10S
+      KC_URL: ${KC_DOMAIN}/auth
+      KEYCLOAK_POST_SECRET: ${KEYCLOAK_FOLLOW_SECRET}
 
   follow_db:
     container_name: follow_db
@@ -56,8 +63,13 @@ services:
       DB_NAME: posts-db
       DB_HOST: posts-db
       DB_PORT: 5432
-      KC_URL: http://keycloak:8080/auth
-      KEYCLOAK_POST_SECRET: BFXlLSLLECfMXqGpYgQxoHOIfoZfCLMP
+      DD_API_KEY: ${DD_API_KEY}
+      DD_SITE: datadoghq.com
+      DD_LOGS_ENABLED: true
+      DD_APM_ENABLED: true
+      DD_STEP: PT10S
+      KC_URL: ${KC_DOMAIN}/auth
+      KEYCLOAK_POST_SECRET: ${KEYCLOAK_POST_SECRET}
 
   posts-db:
     container_name: posts-db
@@ -70,6 +82,12 @@ services:
       POSTGRES_DB: posts-db
     volumes:
       - postdata:/var/lib/postgresql/data2
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 
   postgres:
@@ -92,6 +110,10 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: Pa55w0rd
+      PROXY_ADDRESS_FORWARDING: true
+      KC_PROXY: passthrough
+      KEYCLOAK_PROXY: passthrough
+
       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
       #JDBC_PARAMS: "ssl=true"
     ports:
@@ -99,7 +121,16 @@ services:
     depends_on:
       - postgres
 
-
+  reverse-proxy:
+    container_name: jibber-jabber-reverse-proxy
+    image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${environment}
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/letsencrypt/:ro
 volumes:
   postdata:
     external: false
@@ -108,3 +139,6 @@ volumes:
   postgres_data:
     driver: local
 
+networks:
+  keycloak-net:
+    external: true
