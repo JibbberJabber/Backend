@@ -21,7 +21,7 @@ services:
 
   follow-api:
     container_name: "follow-api"
-    image: ghcr.io/jibbberjabber/folllowing-api:${environment}
+    image: ghcr.io/jibbberjabber/folllowing-api:master
 
     ports:
       - 8080:8080
@@ -54,7 +54,7 @@ services:
 
   posts-api:
     container_name: "posts-api"
-    image: ghcr.io/jibbberjabber/posts-api:${environment}
+    image: ghcr.io/jibbberjabber/posts-api:master
     ports:
       - 8083:8083
     environment:
