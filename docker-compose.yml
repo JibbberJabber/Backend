@@ -140,6 +140,6 @@ volumes:
   postgres_data:
     driver: local
 
-networks:
-  keycloak-net:
-    external: true
+# networks:
+#   keycloak-net:
+#     external: true
