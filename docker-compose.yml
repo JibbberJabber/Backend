@@ -7,11 +7,11 @@ services:
   datadog:
     image: datadog/agent
     environment:
-      - DD_API_KEY=${DD_API_KEY}
-      - DD_SITE=datadoghq.com
-      - DD_LOGS_ENABLED=true
-      - DD_APM_ENABLED=true
-      - DD_STEP=PT10S
+      DD_API_KEY: ${DD_API_KEY}
+      DD_SITE: datadoghq.com
+      DD_LOGS_ENABLED: true
+      DD_APM_ENABLED: true
+      DD_STEP: PT10S
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc/:/host/proc/:ro
@@ -26,18 +26,18 @@ services:
     ports:
       - 8080:8080
     environment:
-      - DB_USER= postgres
-      - DB_PASSWORD= admin
-      - DB_NAME= followers-db
-      - DB_HOST= follow_db
-      - DB_PORT= 5432
-      - DD_API_KEY= ${DD_API_KEY}
-      - DD_SITE= datadoghq.com
-      - DD_LOGS_ENABLED= true
-      - DD_APM_ENABLED= true
-      - DD_STEP= PT10S
-      - KC_URL= ${KC_DOMAIN}/auth
-      - KEYCLOAK_POST_SECRET= ${KEYCLOAK_FOLLOW_SECRET}
+      DB_USER: postgres
+      DB_PASSWORD: admin
+      DB_NAME: followers-db
+      DB_HOST: follow_db
+      DB_PORT: 5432
+      DD_API_KEY: ${DD_API_KEY}
+      DD_SITE: datadoghq.com
+      DD_LOGS_ENABLED: true
+      DD_APM_ENABLED: true
+      DD_STEP: PT10S
+      KC_URL: ${KC_DOMAIN}/auth
+      KEYCLOAK_POST_SECRET: ${KEYCLOAK_FOLLOW_SECRET}
 
   follow_db:
     container_name: follow_db
