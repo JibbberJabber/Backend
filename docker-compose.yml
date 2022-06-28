@@ -33,7 +33,7 @@ services:
       DB_PORT: 5432
       DD_API_KEY: ${DD_API_KEY}
       DD_SITE: datadoghq.com
-      DD_LOGS_ENABLED: yes as String
+      DD_LOGS_ENABLED: !!str true
       DD_APM_ENABLED: !!str true
       DD_STEP: PT10S
       KC_URL: ${KC_DOMAIN}/auth
@@ -65,8 +65,8 @@ services:
       DB_PORT: 5432
       DD_API_KEY: ${DD_API_KEY}
       DD_SITE: datadoghq.com
-      DD_LOGS_ENABLED: yes
-      DD_APM_ENABLED: yes
+      DD_LOGS_ENABLED: !!str true
+      DD_APM_ENABLED: !!str true
       DD_STEP: PT10S
       KC_URL: ${KC_DOMAIN}/auth
       KEYCLOAK_POST_SECRET: ${KEYCLOAK_POST_SECRET}
@@ -105,7 +105,7 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: Pa55w0rd
-      PROXY_ADDRESS_FORWARDING: yes
+      PROXY_ADDRESS_FORWARDING: !!str true
       KC_PROXY: passthrough
       KEYCLOAK_PROXY: passthrough
 
