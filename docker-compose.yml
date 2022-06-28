@@ -115,19 +115,23 @@ services:
   reverse-proxy:
     container_name: jibber-jabber-reverse-proxy
     image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${environment}
+#    depends_on:
+#      - follow-api
+#      - posts-api
+#      - keycloak
     ports:
       - 80:80
       - 443:443
     restart: always
-    volumes:
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/letsencrypt/:ro
+#    volumes:
+#      - ./certbot/www:/var/www/certbot/:ro
+#      - ./certbot/conf/:/etc/letsencrypt/:ro
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
+#  certbot:
+#    image: certbot/certbot:latest
+#    volumes:
+#      - ./certbot/www/:/var/www/certbot/:rw
+#      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 
 
@@ -140,6 +144,6 @@ volumes:
   postgres_data:
     driver: local
 
-# networks:
-#   keycloak-net:
-#     external: true
+networks:
+   keycloak-net:
+     external: true
