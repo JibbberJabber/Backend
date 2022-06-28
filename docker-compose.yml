@@ -58,18 +58,18 @@ services:
     ports:
       - 8083:8083
     environment:
-      DB_USER: postgres
-      DB_PASSWORD: admin
-      DB_NAME: posts-db
-      DB_HOST: posts-db
-      DB_PORT: 5432
-      DD_API_KEY: ${DD_API_KEY}
-      DD_SITE: datadoghq.com
-#      DD_LOGS_ENABLED: true
-#      DD_APM_ENABLED: true
-      DD_STEP: PT10S
-      KC_URL: ${KC_DOMAIN}/auth
-      KEYCLOAK_POST_SECRET: ${KEYCLOAK_POST_SECRET}
+      - DB_USER = postgres
+      - DB_PASSWORD = admin
+      - DB_NAME = posts-db
+      - DB_HOST = posts-db
+      - DB_PORT = 5432
+      - DD_API_KEY = ${DD_API_KEY}
+      - DD_SITE = datadoghq.com
+      - DD_LOGS_ENABLED = true
+      - DD_APM_ENABLED = true
+      - DD_STEP = PT10S
+      - KC_URL = ${KC_DOMAIN}/auth
+      - KEYCLOAK_POST_SECRET= ${KEYCLOAK_POST_SECRET}
 
   posts-db:
     container_name: posts-db
@@ -97,17 +97,17 @@ services:
     container_name: keycloak
     image: quay.io/keycloak/keycloak:legacy
     environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_SCHEMA: public
-      DB_PASSWORD: password
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: Pa55w0rd
-#      PROXY_ADDRESS_FORWARDING: true
-      KC_PROXY: passthrough
-      KEYCLOAK_PROXY: passthrough
+     - DB_VENDOR = POSTGRES
+     - DB_ADDR = postgres
+     - DB_DATABASE = keycloak
+     - DB_USER = keycloak
+     - DB_SCHEMA = public
+     - DB_PASSWORD = password
+     - KEYCLOAK_USER = admin
+     - KEYCLOAK_PASSWORD = Pa55w0rd
+     - PROXY_ADDRESS_FORWARDING = true
+     - KC_PROXY = passthrough
+     - KEYCLOAK_PROXY= passthrough
 
       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
       #JDBC_PARAMS: "ssl=true"
