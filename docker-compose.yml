@@ -2,8 +2,6 @@ version: '3'
 
 services:
 
-  #  ghcr.io/jibbberjabber/folllowing-api:master
-
   datadog:
     image: datadog/agent
     environment:
@@ -124,20 +122,11 @@ services:
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/letsencrypt/:ro
 
-
   certbot:
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
-
-
-#  certbot:
-#    image: certbot/certbot:latest
-#    volumes:
-#      - ./certbot/www/:/var/www/certbot/:rw
-#      - ./certbot/conf/:/etc/letsencrypt/:rw
-
 
 
 
