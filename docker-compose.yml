@@ -117,7 +117,7 @@ services:
 
   reverse-proxy:
     container_name: reverse-proxy
-    image: ngnix
+    image: nginx
     ports:
       - 80:80
       - 443:443
