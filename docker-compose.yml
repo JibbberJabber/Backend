@@ -119,13 +119,13 @@ services:
     restart: always
     volumes:
       - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/letsencrypt/live/:ro
+      - ./certbot/conf/:/etc/letsencrypt/:ro
 
   certbot:
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/live/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 
 
