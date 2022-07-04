@@ -113,7 +113,6 @@ services:
   reverse-proxy:
     container_name: jibber-jabber-reverse-proxy
     image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:develop
-    #    image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${environment}
     ports:
       - 80:80
       - 443:443
