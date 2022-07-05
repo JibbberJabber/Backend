@@ -124,7 +124,7 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/letsencrypt/:ro
-      - ./ngnix/conf.d/:/etc/ngnix/conf.d/:ro
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
 
 
 
