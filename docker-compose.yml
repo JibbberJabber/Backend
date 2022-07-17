@@ -109,11 +109,7 @@ services:
       - 8087:8080
     depends_on:
       - postgres
-#
-#  ui-server:
-#    container_name: ui-server
-#    image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:develop
-#    restart: always
+
 
   reverse-proxy:
     container_name: jj-reverse-proxy
@@ -134,6 +130,7 @@ services:
 
 
 
+
 volumes:
   postdata:
     external: false
@@ -141,4 +138,9 @@ volumes:
     external: false
   postgres_data:
     driver: local
+
+
+networks:
+  keycloak-net:
+    external: true
 
