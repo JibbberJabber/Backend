@@ -114,6 +114,8 @@ services:
     container_name: ui-server
     image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${ui_env}
     restart: always
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
 
 
   reverse-proxy:
