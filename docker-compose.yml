@@ -2,8 +2,6 @@ version: '3'
 
 services:
 
-  #  ghcr.io/jibbberjabber/folllowing-api:master
-
   datadog:
     image: datadog/agent
     environment:
@@ -21,23 +19,23 @@ services:
 
   follow-api:
     container_name: "follow-api"
-    image: ghcr.io/jibbberjabber/folllowing-api:${environment}
+    image: ghcr.io/jibbberjabber/folllowing-api:master
 
     ports:
       - 8080:8080
     environment:
-      DB_USER: postgres
-      DB_PASSWORD: admin
-      DB_NAME: followers-db
-      DB_HOST: follow_db
-      DB_PORT: 5432
-      DD_API_KEY: ${DD_API_KEY}
-      DD_SITE: datadoghq.com
-      DD_LOGS_ENABLED: ${trueWrapper}
-      DD_APM_ENABLED: ${trueWrapper}
-      DD_STEP: PT10S
-      KC_URL: ${KC_DOMAIN}/auth
-      KEYCLOAK_POST_SECRET: ${KEYCLOAK_FOLLOW_SECRET}
+     - DB_USER=postgres
+     - DB_PASSWORD=admin
+     - DB_NAME=followers-db
+     - DB_HOST=follow_db
+     - DB_PORT=5432
+     - DD_API_KEY=${DD_API_KEY}
+     - DD_SITE=datadoghq.com
+     - DD_LOGS_ENABLED=true
+     - DD_APM_ENABLED=true
+     - DD_STEP=PT10S
+     - KC_URL=${KC_DOMAIN}/auth
+     - KEYCLOAK_POST_SECRET=${KEYCLOAK_FOLLOW_SECRET}
 
   follow_db:
     container_name: follow_db
@@ -54,22 +52,22 @@ services:
 
   posts-api:
     container_name: "posts-api"
-    image: ghcr.io/jibbberjabber/posts-api:${environment}
+    image: ghcr.io/jibbberjabber/posts-api:master
     ports:
       - 8083:8083
     environment:
-      DB_USER: postgres
-      DB_PASSWORD: admin
-      DB_NAME: posts-db
-      DB_HOST: posts-db
-      DB_PORT: 5432
-      DD_API_KEY: ${DD_API_KEY}
-      DD_SITE: datadoghq.com
-      DD_LOGS_ENABLED: ${trueWrapper}
-      DD_APM_ENABLED: ${trueWrapper}
-      DD_STEP: PT10S
-      KC_URL: ${KC_DOMAIN}/auth
-      KEYCLOAK_POST_SECRET: ${KEYCLOAK_POST_SECRET}
+      - DB_USER=postgres
+      - DB_PASSWORD=admin
+      - DB_NAME=posts-db
+      - DB_HOST=posts-db
+      - DB_PORT=5432
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_SITE=datadoghq.com
+      - DD_LOGS_ENABLED=true
+      - DD_APM_ENABLED=true
+      - DD_STEP=PT10S
+      - KC_URL=${KC_DOMAIN}/auth
+      - KEYCLOAK_POST_SECRET=${KEYCLOAK_POST_SECRET}
 
   posts-db:
     container_name: posts-db
@@ -83,8 +81,6 @@ services:
     volumes:
       - postdata:/var/lib/postgresql/data2
 
-
-
   postgres:
     image: postgres
     volumes:
@@ -93,45 +89,46 @@ services:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
+
   keycloak:
     container_name: keycloak
     image: quay.io/keycloak/keycloak:legacy
     environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_SCHEMA: public
-      DB_PASSWORD: password
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: Pa55w0rd
-      PROXY_ADDRESS_FORWARDING: ${trueWrapper}
-      KC_PROXY: passthrough
-      KEYCLOAK_PROXY: passthrough
-
-      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-      #JDBC_PARAMS: "ssl=true"
+     - DB_VENDOR=POSTGRES
+     - DB_ADDR=postgres
+     - DB_DATABASE=keycloak
+     - DB_USER=keycloak
+     - DB_SCHEMA=public
+     - DB_PASSWORD=password
+     - KEYCLOAK_USER=admin
+     - KEYCLOAK_PASSWORD=Pa55w0rd
+     - PROXY_ADDRESS_FORWARDING=true
+     - KC_PROXY=passthrough
+     - KEYCLOAK_PROXY=passthrough
     ports:
       - 8087:8080
     depends_on:
       - postgres
-#
- reverse-proxy:
-   container_name: jibber-jabber-reverse-proxy
-   image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${environment}
-   ports:
-     - 80:80
-     - 443:443
-   restart: always
-   volumes:
-     - ./certbot/www:/var/www/certbot/:ro
-     - ./certbot/conf/:/etc/letsencrypt/:ro
 
- certbot:
-   image: certbot/certbot:latest
-   volumes:
-     - ./certbot/www/:/var/www/certbot/:rw
-     - ./certbot/conf/:/etc/letsencrypt/:rw
+
+  reverse-proxy:
+    container_name: jj-reverse-proxy
+    image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${ui_env}
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/letsencrypt/:ro
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+
+
 
 
 volumes:
@@ -142,6 +139,8 @@ volumes:
   postgres_data:
     driver: local
 
+
 networks:
   keycloak-net:
     external: true
+
