@@ -110,21 +110,22 @@ services:
     depends_on:
       - postgres
 #
-#  ui-server:
-#    container_name: ui-server
-#    image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:develop
-#    restart: always
+  ui-server:
+    container_name: ui-server
+    image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${ui_env}
+    restart: always
+
 
   reverse-proxy:
-    container_name: jj-reverse-proxy
-    image: ghcr.io/jibbberjabber/jibber-jabber-base-ui:${ui_env}
+    container_name: reverse-proxy
+    image: nginx
     ports:
       - 80:80
       - 443:443
-    restart: always
     volumes:
-      - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/letsencrypt/:ro
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
 
   certbot:
     image: certbot/certbot:latest
