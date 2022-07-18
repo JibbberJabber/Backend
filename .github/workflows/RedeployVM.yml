@@ -6,23 +6,24 @@ on:
     branches:
       - develop
 
-name: AzureDeploy
+# name: AzureDeploy
 
-jobs:
+# jobs:
 
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
+#     deploy:
+#       runs-on: ubuntu-latest
+#       steps:
 
-      - name: Update server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_IP }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.DEV_KEY }}
-          script: |
-            cd Backend
-            sudo docker-compose stop
-            sudo docker-compose pull
-            sudo docker-compose up --detach
+#       - name: Update server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.DEV_IP }}
+#           username: ${{ secrets.USERNAME }}
+#           key: ${{ secrets.DEV_KEY }}
+#           script: |
+#             cd Backend
+#             sudo docker-compose stop
+#             sudo docker-compose down
+#             sudo docker-compose pull
+#             sudo docker-compose up --detach
 
