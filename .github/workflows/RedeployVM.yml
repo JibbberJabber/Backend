@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - develop
+      - production
 
 name: AzureDeploy
 
