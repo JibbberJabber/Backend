@@ -1,30 +1,35 @@
-
-
-
 on:
   push:
     branches:
       - develop
 
- name: AzureDeploy
+name: AzureDeploy
 
- jobs:
+jobs:
+  build:
 
-     deploy:
-       runs-on: ubuntu-latest
-       steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
 
-       - name: Update server
-         uses: appleboy/ssh-action@master
-         with:
-           host: ${{ secrets.DEV_IP }}
-           username: ${{ secrets.USERNAME }}
-           key: ${{ secrets.DEV_KEY }}
-           script: |
-             cd Backend
-             git pull
-             git checkout production
-             sudo docker-compose stop 
-             sudo docker-compose pull
-             sudo docker-compose up --detach
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
+      - name: Update server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PROD_KEY }}
+          script: |
+            cd Backend
+            git pull
+            git checkout origin/develop
+            sudo docker-compose stop
+            sudo docker-compose pull
+            sudo docker-compose up --detach
